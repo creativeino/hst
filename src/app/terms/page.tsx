@@ -1,101 +1,124 @@
 import Link from "next/link";
+import { ShieldCheck, FileText, Lock, CheckCircle2, Scale } from "lucide-react";
 
 const sections = [
- {
- id: "fixed-fee",
- title: "1. Fixed fee agreement",
- body: "All search fees are agreed in writing before recruitment outreach begins. Fees are fixed and are not subject to variable salary-percentage recalculations upon final job offers. Pricing is agreed in writing after a scoping call.",
- },
- {
- id: "delivery",
- title: "2. Search delivery and exclusivity",
- body: "HST operates on an exclusive committed partnership basis to ensure exhaustive headhunting, bespoke candidate vetting, and dedicated senior consultant attention throughout the search. Exclusive commitment ensures the role is prioritized and filled promptly.",
- },
- {
- id: "replacement",
- title: "3. 8-Week replacement guarantee",
- body: "Every Fixed Fee placement includes an 8-week replacement guarantee. In the event that an introduced candidate leaves employment within that period through no fault of the client, HST will run a free replacement search in accordance with the signed engagement schedule.",
- },
- {
- id: "refund",
- title: "4. 14-Day cash refund commitment",
- body: "If HST does not place a suitable candidate within the agreed search period and we have not met our agreed service commitments, the client receives a full refund within 14 working days. No credit notes, no future hire obligations - your money back.",
- },
- {
- id: "confidentiality",
- title: "5. Confidentiality & NDAs",
- body: "Both parties agree to treat all business information, employer trade secrets, and candidate profiles as strictly confidential. No candidate details are ever circulated without express authorization.",
- },
- {
- id: "payments",
- title: "6. Fees and payment schedule",
- body: "Unless otherwise agreed in writing, fees are structured with clear milestones confirmed before work commences. Invoices are payable within the agreed terms stated in the Engagement Order.",
- },
- {
- id: "contact",
- title: "7. Company identification & contact",
- body: "HST Group Ltd. Registered office: Office 44, 3 Caxton Road, Fulwood, Preston, PR2 9ZZ. Email: hello@hst-hiring.co.uk. Phone: 01772 970609.",
- },
+  {
+    id: "fixed-fee",
+    title: "1. Fixed Fee Agreement & Upfront Pricing",
+    body: "All search fees are agreed in writing before recruitment outreach begins. Fees are strictly fixed and are never subject to variable salary-percentage recalculations upon final job offers. Once an engagement schedule is signed, the fee remains unchanged regardless of candidate starting salary or subsequent pay reviews.",
+  },
+  {
+    id: "delivery",
+    title: "2. Search Delivery, SLA Window & Exclusivity",
+    body: "HST operates on an exclusive committed partnership basis for an agreed delivery window (typically 6-12 weeks). This commitment guarantees exhaustive direct headhunting of passive practitioners, bespoke candidate qualification, and dedicated senior consultant oversight. Exclusivity ensures your firm is represented with total confidentiality and priority.",
+  },
+  {
+    id: "replacement",
+    title: "3. 8-Week Candidate Replacement Shield",
+    body: "Every Fixed Fee search is protected by an 8-Week Placement Replacement Shield. In the unlikely event that an introduced practitioner leaves employment within the first 8 weeks (other than through redundancy, client insolvency, or material breach of the agreed job specification), HST will execute a priority replacement search at zero additional fee.",
+  },
+  {
+    id: "refund",
+    title: "4. Written 14-Day 100% Cash Refund Guarantee",
+    body: "If HST does not present a verified, qualified shortlist of candidates matching the agreed specification within the contractual SLA delivery period, and has not met the delivery milestones set out in the schedule, the client is entitled to a 100% cash refund payable within 14 working days. No credit vouchers, no mandatory roll-over obligations.",
+  },
+  {
+    id: "confidentiality",
+    title: "5. Strict Confidentiality & Candidate Non-Shopping",
+    body: "Both parties agree to treat all business information, client commercial plans, and candidate identities as strictly privileged and confidential under non-disclosure standards. HST operates a zero candidate-shopping policy: candidate CVs and personal identifiers are never circulated to third parties without prior knowledge and express written permission.",
+  },
+  {
+    id: "payments",
+    title: "6. Billing Milestones & Invoicing Terms",
+    body: "Unless otherwise agreed in writing, fees are structured into clear, transparent commercial milestones confirmed prior to search commencement. Invoices are strictly payable within 14 days of invoice date in accordance with the signed Engagement Order.",
+  },
+  {
+    id: "company",
+    title: "7. Company Registration, Governance & Regulatory Compliance",
+    body: "HST Group Ltd is a company registered in England and Wales under Company Registration No. 14923180. Registered Office: Office 44, 3 Caxton Road, Fulwood, Preston, Lancashire, PR2 9ZZ. HST is registered with the Information Commissioner's Office (ICO) under the UK Data Protection Act 2018 (Registration No. ZB610924) and complies with the Employment Agencies Act 1973 and the Conduct of Employment Agencies and Employment Businesses Regulations 2003.",
+  },
 ];
 
 export default function TermsPage() {
- return (
- <div className="wrap py-14 sm:py-20">
- <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
- <aside className="lg:col-span-4">
- <h1 className="h2">Terms of Business</h1>
- <p className="mt-5 text-[14px] text-ink/50">
- HST Hiring client agreement summary
- </p>
- <nav className="hidden lg:block mt-10 sticky top-28">
- <ul className="space-y-1.5">
- {sections.map((section) => (
- <li key={section.id}>
- <a
- href={`#${section.id}`}
- className="block px-3 py-1.5 rounded-lg text-[14px] text-muted hover:text-ink hover:bg-surface transition-colors"
- >
- {section.title}
- </a>
- </li>
- ))}
- </ul>
- </nav>
- </aside>
+  return (
+    <div className="wrap py-14 sm:py-20">
+      {/* Top Trust Header */}
+      <div className="mb-12 pb-8 border-b border-line">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-soft border border-accent/30 text-accent-deep text-xs font-bold mb-4">
+          <ShieldCheck className="w-4 h-4" />
+          <span>Statutory Terms of Business & Commercial SLAs</span>
+        </div>
+        <h1 className="h2 text-ink">Terms of Business & Client Protections</h1>
+        <p className="mt-3 text-base text-muted max-w-3xl leading-relaxed">
+          Transparent, pre-agreed commercial terms designed to protect employers and candidates. All search assignments are governed by the laws of England & Wales.
+        </p>
+      </div>
 
- <div className="lg:col-span-8 max-w-[68ch]">
- <p className="lead text-ink/70">
- The basis on which HST Hiring provides fixed-fee recruitment
- services.
- </p>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+        <aside className="lg:col-span-4">
+          <div className="sticky top-28 p-5 rounded-2xl bg-surface border border-line space-y-4">
+            <span className="text-xs font-bold uppercase tracking-wider text-accent-deep block">
+              Quick Clause Navigation
+            </span>
+            <nav>
+              <ul className="space-y-1">
+                {sections.map((section) => (
+                  <li key={section.id}>
+                    <a
+                      href={`#${section.id}`}
+                      className="block px-3 py-2 rounded-lg text-[13.5px] font-medium text-muted hover:text-ink hover:bg-surface-2 transition-colors"
+                    >
+                      {section.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
- <div className="mt-10 space-y-10">
- {sections.map((section) => (
- <section key={section.id} id={section.id} className="scroll-mt-28">
- <h2 className="font-serif text-[clamp(22px,2vw,28px)] leading-tight tracking-[-0.02em]">
- {section.title}
- </h2>
- <p className="mt-3 text-[16px] leading-relaxed text-ink/70">
- {section.body}
- </p>
- </section>
- ))}
- </div>
+            <div className="pt-4 border-t border-line text-xs text-muted leading-relaxed">
+              <p className="font-semibold text-ink">Need a tailored search agreement?</p>
+              <p className="mt-1">
+                Contact our directors directly at{" "}
+                <a href="mailto:hello@hst-hiring.co.uk" className="text-accent-deep font-bold hover:underline">
+                  hello@hst-hiring.co.uk
+                </a>
+              </p>
+            </div>
+          </div>
+        </aside>
 
- <div className="mt-14 pt-8 border-t border-line">
- <p className="text-[15px] text-muted">
- Ready to discuss a search?{" "}
- <Link
- href="/contact"
- className="font-semibold text-accent-deep hover:text-ink underline underline-offset-4 decoration-accent transition-colors"
- >
- Book a free review
- </Link>
- .
- </p>
- </div>
- </div>
- </div>
- </div>
- );
+        <main className="lg:col-span-8 space-y-10">
+          {sections.map((section) => (
+            <article
+              key={section.id}
+              id={section.id}
+              className="scroll-mt-32 p-6 sm:p-7 rounded-2xl bg-paper border border-line shadow-2xs hover:border-line-strong transition-colors"
+            >
+              <h2 className="text-lg sm:text-xl font-display font-bold text-ink mb-3 flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
+                {section.title}
+              </h2>
+              <p className="text-[15px] sm:text-[15.5px] text-muted leading-relaxed font-normal">
+                {section.body}
+              </p>
+            </article>
+          ))}
+
+          <div className="p-6 rounded-2xl bg-accent-soft/70 border border-accent/25 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="font-display font-bold text-ink text-base">
+                Ready to review a role-specific search SLA?
+              </h3>
+              <p className="text-xs text-muted mt-0.5">
+                Book a confidential 20-minute scoping call with an HST director.
+              </p>
+            </div>
+            <Link href="/contact" className="btn btn-accent text-xs font-bold shrink-0 px-5 py-2.5">
+              Book Scoping Call
+            </Link>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
 }
