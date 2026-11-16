@@ -40,12 +40,12 @@ const IMPACT_METRICS = [
  subtext: "Current employer never alerted",
  },
  {
- numericValue: 0,
- prefix: "",
- suffix: "",
- label: "Unapproved Submissions",
- subtext: "You control every single introduction",
- },
+    numericValue: 100,
+    prefix: "",
+    suffix: "%",
+    label: "Candidate Consent Controlled",
+    subtext: "No CV is ever submitted without express approval",
+  },
  {
  numericValue: 47,
  prefix: "",
