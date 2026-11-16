@@ -10,12 +10,6 @@ import {
   ShieldCheck,
   Check,
 } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export interface HeroSlide {
   id: string;
@@ -105,62 +99,9 @@ const HERO_SLIDES: HeroSlide[] = [
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const bgImageRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const slide = HERO_SLIDES[current];
-
-  // GSAP Cinematic Parallax on Scroll
-  useEffect(() => {
-    const container = containerRef.current;
-    const bgImage = bgImageRef.current;
-    if (!container || !bgImage) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const parallax = gsap.to(bgImage, {
-      y: 120,
-      scale: 1.08,
-      ease: "none",
-      scrollTrigger: {
-        trigger: container,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-      },
-    });
-
-    return () => {
-      parallax.kill();
-    };
-  }, []);
-
-  // GSAP Slide Entry Animation Timeline
-  useEffect(() => {
-    const content = contentRef.current;
-    if (!content) return;
-
-    const elements = content.querySelectorAll(".hero-anim-node");
-    gsap.fromTo(
-      elements,
-      {
-        opacity: 0,
-        y: 28,
-        filter: "blur(6px)",
-      },
-      {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        stagger: 0.08,
-        duration: 0.7,
-        ease: "power3.out",
-        overwrite: "auto",
-      }
-    );
-  }, [current]);
 
   // Autoplay Slider Timer
   useEffect(() => {
@@ -188,15 +129,11 @@ export default function HeroSection() {
   };
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-[620px] sm:min-h-[700px] lg:min-h-[740px] flex items-center justify-center overflow-hidden bg-[#06120c]"
-    >
-      {/* ================= GSAP PARALLAX BACKGROUND IMAGE ================= */}
+    <section className="relative min-h-[600px] sm:min-h-[660px] lg:min-h-[720px] flex items-center justify-center overflow-hidden bg-[#06120c]">
+      {/* Background Image Layer */}
       <div
-        ref={bgImageRef}
         key={slide.id}
-        className="absolute -top-[10%] left-0 right-0 -bottom-[10%] z-0 transition-opacity duration-700"
+        className="absolute inset-0 z-0 transition-opacity duration-700"
       >
         <Image
           src={slide.image}
@@ -206,38 +143,38 @@ export default function HeroSection() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Cinematic Directional Gradients */}
+        {/* Gradients to keep text crisp & readable */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#06120c]/95 via-[#06120c]/85 to-[#06120c]/60" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#06120c] via-transparent to-[#06120c]/50" />
       </div>
 
-      {/* ================= LEFT-ALIGNED CONTENT WITH GSAP REVEALS ================= */}
-      <div className="wrap relative z-10 text-left py-20 sm:py-24">
-        <div ref={contentRef} className="max-w-3xl">
+      {/* Main Content */}
+      <div className="wrap relative z-10 text-left py-16 sm:py-20 lg:py-24">
+        <div className="max-w-3xl">
           {/* Top Tag Pill */}
-          <div className="hero-anim-node inline-flex items-center gap-2 rounded-full bg-accent/15 backdrop-blur-md border border-accent/30 px-3.5 py-1 text-xs font-bold text-accent shadow-sm">
+          <div className="inline-flex items-center gap-2 rounded-full bg-accent/15 backdrop-blur-md border border-accent/30 px-3.5 py-1 text-xs font-bold text-accent shadow-sm">
             <span>{slide.tag}</span>
           </div>
 
-          {/* Main Headline with Accent Glow */}
-          <h1 className="hero-anim-node mt-4 font-display font-black leading-[1.02] tracking-[-0.04em] text-[clamp(36px,4.5vw,62px)] text-white drop-shadow-md">
+          {/* Main Headline */}
+          <h1 className="mt-4 font-display font-black leading-[1.08] tracking-[-0.035em] text-[clamp(32px,4vw,58px)] text-white drop-shadow-md">
             {slide.headline}{" "}
             <span className="relative inline-block text-accent">
               {slide.accentWord}
-              <span className="absolute bottom-1 left-0 right-0 h-[3.5px] bg-accent rounded-full" />
+              <span className="absolute bottom-1 left-0 right-0 h-[3px] bg-accent rounded-full" />
             </span>
           </h1>
 
           {/* Sub-headline */}
-          <p className="hero-anim-node mt-4 text-[16px] sm:text-[18px] leading-relaxed text-white/85 max-w-[46ch] font-normal">
+          <p className="mt-4 text-[15px] sm:text-[17px] leading-relaxed text-white/85 max-w-[48ch] font-normal">
             {slide.subheadline}
           </p>
 
           {/* Action Buttons */}
-          <div className="hero-anim-node mt-7 flex flex-wrap items-center gap-3.5">
+          <div className="mt-7 flex flex-wrap items-center gap-3">
             <Link
               href={slide.ctaLink}
-              className="btn btn-accent text-[14px] font-bold px-6 py-3 shadow-lg shadow-accent/20 transition-transform hover:-translate-y-0.5 active:translate-y-0"
+              className="btn btn-accent text-[13.5px] sm:text-[14px] font-bold px-5 sm:px-6 py-3 shadow-lg shadow-accent/20 transition-transform active:scale-95"
             >
               <span>{slide.ctaText}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -245,14 +182,14 @@ export default function HeroSection() {
 
             <Link
               href={slide.secondaryCtaLink}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-[14px] bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white transition-all hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-[13.5px] sm:text-[14px] bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white transition-all active:scale-95"
             >
               <span>{slide.secondaryCtaText}</span>
             </Link>
           </div>
 
           {/* Proof Points Checkmarks */}
-          <ul className="hero-anim-node mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 pt-6 border-t border-white/15">
+          <ul className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 pt-6 border-t border-white/15">
             {slide.proofPoints.map((point) => (
               <li
                 key={point}
@@ -267,9 +204,8 @@ export default function HeroSection() {
           </ul>
         </div>
 
-        {/* ================= SLIDE CONTROLS & BOTTOM STATS ROW ================= */}
+        {/* Slide Controls & Bottom Stats Row */}
         <div className="mt-10 pt-6 border-t border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-6 max-w-4xl">
-          {/* Quick Highlight Metrics */}
           <div className="flex items-center gap-6">
             <div>
               <span className="font-display text-2xl font-black text-accent tracking-tight block">
@@ -290,13 +226,12 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Interactive Slide Controls (Arrows & Indicators) */}
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={prevSlide}
               aria-label="Previous slide"
-              className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all cursor-pointer hover:scale-105 active:scale-95"
+              className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all cursor-pointer active:scale-95"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -321,7 +256,7 @@ export default function HeroSection() {
               type="button"
               onClick={nextSlide}
               aria-label="Next slide"
-              className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all cursor-pointer hover:scale-105 active:scale-95"
+              className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all cursor-pointer active:scale-95"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
