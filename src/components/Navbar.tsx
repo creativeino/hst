@@ -12,8 +12,6 @@ import {
   Calculator,
   Calendar,
   ArrowRight,
-  ShieldCheck,
-  ChevronDown,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { COMPANY_CONTACT } from "@/data/siteData";
@@ -36,86 +34,86 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 15);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <>
+    <div className="sticky top-0 z-50 w-full">
       {/* ================= TOP UTILITY STRIP ================= */}
-      <div className="bg-ink text-white border-b border-ink-2/60 text-[11px] sm:text-xs py-2 px-4 relative z-50">
-        <div className="wrap flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 text-white/90">
+      <div className="bg-ink text-white border-b border-ink-2/80 text-[11px] sm:text-xs py-2 px-3 sm:px-4">
+        <div className="wrap flex items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 min-w-0">
             <span className="flex h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
-            <span className="truncate">
-              UK Fixed Fee Legal and Professional Recruitment :{" "}
+            <p className="truncate text-[11px] sm:text-xs text-white/90">
+              <span className="hidden sm:inline text-white/70">UK Legal &amp; Professional Recruitment : </span>
               <strong className="text-accent font-semibold tracking-wide">
                 Pre-Agreed Flat Fees
               </strong>
-            </span>
+            </p>
           </div>
 
-          <div className="hidden sm:flex items-center gap-5 text-white/80">
+          <div className="flex items-center gap-3 sm:gap-5 text-white/80 shrink-0">
             <a
               href={`tel:${COMPANY_CONTACT.phone}`}
               className="flex items-center gap-1.5 hover:text-white transition-colors"
             >
               <Phone className="w-3 h-3 text-accent" />
-              <span className="font-medium">{COMPANY_CONTACT.phone}</span>
+              <span className="font-mono text-[11px] sm:text-xs">{COMPANY_CONTACT.phone}</span>
             </a>
-            <span className="h-3 w-px bg-white/20" />
+            <span className="hidden sm:inline h-3 w-px bg-white/20" />
             <a
               href={`mailto:${COMPANY_CONTACT.email}`}
-              className="flex items-center gap-1.5 hover:text-white transition-colors"
+              className="hidden sm:flex items-center gap-1.5 hover:text-white transition-colors"
             >
               <Mail className="w-3 h-3 text-accent" />
-              <span className="font-medium">{COMPANY_CONTACT.email}</span>
+              <span className="font-medium text-[11px] sm:text-xs">{COMPANY_CONTACT.email}</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* ================= MAIN NAVIGATION HEADER ================= */}
+      {/* ================= MAIN NAVIGATION BAR ================= */}
       <header
         id="top"
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+        className={`w-full transition-all duration-300 ${
           isScrolled
-            ? "bg-paper/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(11,26,19,0.08)] border-b border-line py-3"
-            : "bg-paper border-b border-line py-4"
+            ? "bg-paper/95 backdrop-blur-md shadow-[0_4px_20px_-4px_rgba(11,26,19,0.08)] border-b border-line py-2.5 sm:py-3"
+            : "bg-paper border-b border-line py-3.5 sm:py-4"
         }`}
       >
         <div className="wrap">
-          <div className="flex items-center justify-between gap-8">
+          <div className="flex items-center justify-between gap-4 sm:gap-8">
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-3 shrink-0 group select-none"
+              className="flex items-center gap-2.5 sm:gap-3 shrink-0 group select-none"
               onClick={() => setIsOpen(false)}
               aria-label="HST Hiring home"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft border border-accent/40 p-1.5 shadow-2xs group-hover:border-accent group-hover:scale-105 transition-all duration-200">
+              <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-accent-soft border border-accent/40 p-1 sm:p-1.5 shadow-2xs group-hover:border-accent transition-all duration-200">
                 <Image
                   src="/images/HST-Logomark.png"
                   alt="HST Logo"
                   width={30}
                   height={30}
-                  className="h-7 w-auto object-contain"
+                  className="h-6 sm:h-7 w-auto object-contain"
                   priority
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-[20px] font-display font-bold tracking-tight text-ink leading-tight">
+                <span className="text-[18px] sm:text-[20px] font-display font-bold tracking-tight text-ink leading-tight">
                   HST<span className="text-accent ml-0.5 font-bold">Hiring</span>
                 </span>
-                <span className="text-[9.5px] uppercase tracking-wider font-bold text-muted -mt-0.5">
+                <span className="text-[9px] sm:text-[9.5px] uppercase tracking-wider font-bold text-muted -mt-0.5">
                   Preston and UK-Wide
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Navigation Links with Smooth Capsule Pill */}
+            {/* Desktop Navigation Links */}
             <nav
               className="hidden md:flex items-center gap-1 p-1 rounded-full bg-surface border border-line"
               onMouseLeave={() => setHoveredIdx(null)}
@@ -184,7 +182,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2.5 -mr-1 text-ink flex items-center justify-center rounded-xl bg-surface border border-line hover:bg-surface-2 transition-colors"
+              className="md:hidden p-2 rounded-xl bg-surface border border-line hover:bg-surface-2 text-ink flex items-center justify-center transition-colors shrink-0"
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
@@ -203,7 +201,7 @@ export default function Navbar() {
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="md:hidden border-t border-line bg-paper/98 backdrop-blur-xl overflow-hidden shadow-lg"
             >
-              <nav className="wrap py-5 flex flex-col space-y-1">
+              <nav className="wrap py-4 flex flex-col space-y-1">
                 {navLinks.map((link, idx) => {
                   const isActive =
                     pathname === link.href ||
@@ -218,7 +216,7 @@ export default function Navbar() {
                       <Link
                         href={link.href}
                         onClick={() => setIsOpen(false)}
-                        className={`flex items-center justify-between py-3 px-3.5 rounded-xl text-[15.5px] font-medium transition-all ${
+                        className={`flex items-center justify-between py-2.5 px-3.5 rounded-xl text-[15px] font-medium transition-all ${
                           isActive
                             ? "bg-accent-soft text-accent-deep font-semibold border border-accent/20"
                             : "text-ink/80 hover:text-ink hover:bg-surface"
@@ -235,7 +233,7 @@ export default function Navbar() {
                   );
                 })}
 
-                <div className="mt-5 pt-4 border-t border-line flex flex-col gap-3">
+                <div className="mt-4 pt-4 border-t border-line flex flex-col gap-3">
                   <div className="grid grid-cols-2 gap-2">
                     <Link
                       href="/pricing#calculator"
@@ -259,7 +257,7 @@ export default function Navbar() {
                   </div>
 
                   <div className="flex items-center justify-between text-xs text-muted pt-2 px-1">
-                    <a href={`tel:${COMPANY_CONTACT.phone}`} className="hover:text-ink transition-colors">
+                    <a href={`tel:${COMPANY_CONTACT.phone}`} className="hover:text-ink transition-colors font-mono">
                       {COMPANY_CONTACT.phone}
                     </a>
                     <span>:</span>
@@ -321,6 +319,6 @@ export default function Navbar() {
           </div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }
